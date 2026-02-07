@@ -1,0 +1,22 @@
+[Unit]
+Description=Discord Selfbot
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/discord_selfbot
+ExecStart=/opt/discord_selfbot/venv/bin/python /opt/discord_selfbot/main.py
+Restart=on-failure
+RestartSec=5
+TimeoutStopSec=15
+
+# Journald logging (no file writes by default)
+StandardOutput=journal
+StandardError=journal
+
+# Optional hardening
+NoNewPrivileges=true
+
+[Install]
+WantedBy=multi-user.target
